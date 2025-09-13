@@ -78,3 +78,9 @@ def cadastrar_estudante(request):
      estudante.save()
      return redirect('cadastrar_estudante')
 
+def deletar_estudante(request, id): 
+    estudante = get_object_or_404(Estudante, id=id)
+    estudante.delete()
+    return redirect('listar_estudantes')
+
+
