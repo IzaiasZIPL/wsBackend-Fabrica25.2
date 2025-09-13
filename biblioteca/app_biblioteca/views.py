@@ -99,4 +99,7 @@ def atualizar_estudante(request, id):
 
     return redirect('listar_estudantes')
 
+def listar_estudantes(request):
+    estudantes = Estudante.objects.all()
+    return render(request, 'app_biblioteca/estudantes/listar_estudantes.html', {'estudantes': estudantes})
 
