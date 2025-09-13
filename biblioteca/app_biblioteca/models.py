@@ -5,6 +5,7 @@ from django.db import models
 class Livro(models.Model):
     titulo = models.CharField(max_length=100)
     isbn = models.IntegerField(unique=True)
+    autor = models.CharField(max_length=50, default="Desconhecido")
     editora = models.CharField(max_length=30)
     assunto = models.CharField(max_length=50)
     paginas = models.IntegerField()
