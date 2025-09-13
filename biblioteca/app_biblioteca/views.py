@@ -83,4 +83,20 @@ def deletar_estudante(request, id):
     estudante.delete()
     return redirect('listar_estudantes')
 
+def atualizar_estudante(request, id):
+    estudante = get_object_or_404(Estudante, id=id)
+    
+    nome = request.POST.get('nome')
+    email = request.POST.get('email')
+    dataDeNascimento = request.POST.get('dataDeNascimento')
+    telefone = request.POST.get('telefone')
+
+    estudante.nome = nome
+    estudante.email = email
+    estudante.dataDeNascimento = dataDeNascimento
+    estudante.telefone = telefone
+    estudante.save()
+
+    return redirect('listar_estudantes')
+
 
