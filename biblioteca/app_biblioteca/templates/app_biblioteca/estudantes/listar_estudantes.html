@@ -11,7 +11,7 @@
     <title>Lista de estudantes</title>
   </head>
   <body>
-   
+   <!-- Navbar para navegação no sistema-->
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Biblioteca</a>
@@ -39,11 +39,11 @@
     </div>
   </div>
 </nav>
-
+            <!-- padding para melhorar a exibição da tabela-->
 <main style="padding: 10px;">
     <table class="table">
   <thead>
-    <tr>
+    <tr><!-- Cabeçalho da tabela -->
       <th scope="col">id</th>
       <th scope="col">Nome</th>
       <th scope="col">Email</th>
@@ -56,6 +56,7 @@
   </thead>
    
   <tbody>
+    <!-- loop que faz com que seja exibida uma lista com os estudantes cadastrados -->
     {% for estudante in estudantes %}
     <tr>
       <form action="{% url 'atualizar_estudante' estudante.id %}" method="POST">
@@ -71,6 +72,7 @@
       </form>
     </tr>
     {% endfor %}
+    <!--fim do loop -->
   </tbody>
 </table>
 </main>

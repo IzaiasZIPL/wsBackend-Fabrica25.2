@@ -27,7 +27,7 @@
 
   </head>
   <body>
-
+    <!-- Navbar para navegação no sistema-->  
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Biblioteca</a>
@@ -57,7 +57,7 @@
 </nav>
 
     <div class = 'formulario'>
-
+<!-- Formulário de Cadastro de Estudantes -->
     <form action ='{% url "cadastrar_estudante" %}' method = 'POST'>
         {% csrf_token %}
         <br><br>
@@ -77,9 +77,10 @@
     <input type="text" name="livro_emprestado" class="form-control" placeholder = 'Digite o livro emprestado'>
     <br>
     <div class = 'botoes'>
+    <!-- Botão para cadastrar o estudante-->
 <input type="submit" value="Cadastrar" class="btn btn-success">
     <br>
-    <br>
+    <br> <!-- Botão para voltar a home-->
     <a href="{% url 'home' %}" class="btn btn-secondary">Voltar</a>
     <br>
     <br> 

@@ -32,6 +32,7 @@
 </head>
 
 <body>
+  <!-- Navbar para navegação no sistema-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Biblioteca</a>
@@ -61,7 +62,7 @@
 </nav>
 
   <div class='formulario'>
-    
+    <!--tratamento de erro caso isbn seja igual a um cadastrado -->
     {% if error %}
     <div class="alert alert-danger" role="alert">
       <strong>Erro!</strong> {{ error }}
@@ -74,6 +75,7 @@
     </div>
     {% endif %}
 
+    <!-- Formulário de Cadastro de Livros -->
     <form action='{% url "cadastrar_livro" %}' method='POST'>
       {% csrf_token %}
       <br><br>
@@ -97,10 +99,12 @@
       <label for="">Páginas<span class="required">*</span></label>
       <input type="number" name="paginas" class="form-control" placeholder='Digite o número de páginas do livro' required>
       <br>
+      <!-- Botões de Ação -->
       <div class = 'botoes'>
       <input type="submit" value="Cadastrar" class="btn btn-success">
       <br>
       <br>
+      <!-- Botão para voltar a home-->
       <a href="{% url 'home' %}" class="btn btn-secondary">Voltar</a>
       <br><br>
       </div>
@@ -113,9 +117,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
-
+ <!-- Script para buscar informações do livro pelo ISBN -->
   <script>
-    document.getElementById('buscarLivroBtn').onclick = function () {
+       document.getElementById('buscarLivroBtn').onclick = function () {
       const isbn = document.querySelector('input[name="isbn"]').value;
       fetch('/app_biblioteca/buscar_livro/?isbn=' + isbn)
         .then(response => response.json())
