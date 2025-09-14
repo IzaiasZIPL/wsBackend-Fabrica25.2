@@ -4,7 +4,7 @@ from .views import listar_livros, cadastrar_livro, deletar_livro, atualizar_livr
 
 #rota, view e nome de referencia
 urlpatterns = [
-    path('', home, name='home'),
+    path('home/', home, name='home'),
     path('listar_livros/', listar_livros, name= 'listar_livros'),
     path('cadastrar_livro/', cadastrar_livro, name= 'cadastrar_livro'),
     path('deletar_livro/<int:id>', deletar_livro, name = 'deletar_livro'),

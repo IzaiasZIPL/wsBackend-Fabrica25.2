@@ -5,7 +5,7 @@ import requests
 #from .forms import PessoaForm
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'app_biblioteca/home.html')
 #viws de livros
 def cadastrar_livro(request):
   if request.method == 'GET':
