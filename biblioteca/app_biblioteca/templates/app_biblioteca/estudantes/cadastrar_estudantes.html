@@ -20,6 +20,9 @@
             align-items: center;
 
         }
+        .required {
+            color: red;
+        }
     </style>
 
   </head>
@@ -58,17 +61,17 @@
     <form action ='{% url "cadastrar_estudante" %}' method = 'POST'>
         {% csrf_token %}
         <br><br>
-    <label for="">Nome</label>
-    <input type="text" name="nome" class="form-control" placeholder = 'Digite o nome do estudante'>
+    <label for="">Nome<span class="required">*</span></label>
+    <input type="text" name="nome" class="form-control" placeholder = 'Digite o nome do estudante'required>
     <br>
-    <label for="">Email</label>
-    <input type="email" name="email" class="form-control" placeholder = 'Digite o email do estudante'>
+    <label for="">Email<span class="required">*</span></label>
+    <input type="email" name="email" class="form-control" placeholder = 'Digite o email do estudante'required>
     <br>
-    <label for="">Data de Nascimento</label>
-    <input type="date" name="dataDeNascimento" class="form-control" placeholder = 'Digite a data de nascimento do estudante'>
+    <label for="">Data de Nascimento<span class="required">*</span></label>
+    <input type="date" name="dataDeNascimento" class="form-control" placeholder = 'Digite a data de nascimento do estudante'required>
     <br>
-    <label for="">Telefone</label>
-    <input type="text" name="telefone" class="form-control" placeholder = 'Digite o telefone do estudante'>
+    <label for="">Telefone<span class="required">*</span></label>
+    <input type="text" name="telefone" class="form-control" placeholder = 'Digite o telefone do estudante'required>
     <br>
     <label for="">Livro Emprestado</label>
     <input type="text" name="livro_emprestado" class="form-control" placeholder = 'Digite o livro emprestado'>

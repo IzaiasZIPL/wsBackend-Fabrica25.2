@@ -14,15 +14,18 @@
   <style>
 
     .formulario{
-            width: 500px;
-            margin: auto;
+          width: 500px;
+          margin: auto;
         }
-        .botoes{
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
+    .botoes{
+         display: flex;
+         justify-content: space-around;
+         align-items: center;
             
         }
+      .required {
+        color: red;
+      }
 
   </style>
 
@@ -74,24 +77,24 @@
     <form action='{% url "cadastrar_livro" %}' method='POST'>
       {% csrf_token %}
       <br><br>
-      <label for="">Titulo</label>
+      <label for="" >Titulo<span class="required">*</span></label>
       <input type="text" name="titulo" class="form-control" placeholder='Digite o titulo do livro' required>
       <br>
-      <label for="">ISBN</label>
+      <label for="">ISBN<span class="required">*</span></label>
       <input type="text" name="isbn" class="form-control" placeholder='Digite o ISBN do livro'>
       <br>
       <button type="button" id="buscarLivroBtn" class="btn btn-info">Buscar pelo ISBN</button>
       <br>
-      <label for="">Autor</label>
+      <label for="">Autor<span class="required">*</span></label>
       <input type="text" name="autor" class="form-control" placeholder='Digite o autor do livro' required>
       <br>
-      <label for="">Editora</label>
+      <label for="">Editora<span class="required">*</span></label>
       <input type="text" name="editora" class="form-control" placeholder='Digite a editora do livro' required>
       <br>
-      <label for="">Descrição</label>
+      <label for="">Descrição<span class="required">*</span></label>
       <input type="text" name="assunto" class="form-control" placeholder='Digite o assunto do livro' required>
       <br>
-      <label for="">Páginas</label>
+      <label for="">Páginas<span class="required">*</span></label>
       <input type="number" name="paginas" class="form-control" placeholder='Digite o número de páginas do livro' required>
       <br>
       <div class = 'botoes'>
@@ -120,8 +123,7 @@
           if (!data.erro) {
             document.querySelector('input[name="titulo"]').value = data.titulo;
             document.querySelector('input[name="autor"]').value = data.autor;
-            document.querySelector('input[name="editora"]').value = data.editora;
-            document.querySelector('input[name="assunto"]').value = data.assunto;
+            document.querySelector('input[name="editora"]').value = data.editora; 
             document.querySelector('input[name="paginas"]').value = data.paginas;
           } else {
             alert(data.erro);
