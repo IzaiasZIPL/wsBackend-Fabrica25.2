@@ -10,6 +10,7 @@ local_settings.py
 
 # Ambientes virtuais
 .env
+*.env
 venv/
 .venv/
 env/
@@ -35,3 +36,10 @@ ENV/
 *.swp
 *~
 
+# Arquivos estáticos e de mídia
+staticfiles/
+media/
+uploads/
+
+# Gunicorn / processos de produção
+*.pid
