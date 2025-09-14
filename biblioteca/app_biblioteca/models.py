@@ -20,6 +20,7 @@ class Estudante(models.Model):
     dataDeNascimento = models.DateField()
     telefone = models.IntegerField()
     email = models.EmailField(max_length=50)
+    livro_emprestado = models.OneToOneField(Livro, on_delete=models.SET_NULL, null=True, blank=True)
     
 
 

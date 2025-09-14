@@ -33,6 +33,7 @@
       <td><input type="text" name= 'email' value="{{ estudante.email }}" class="form-control"></td>
       <td><input type="text" name= 'dataDeNascimento' value="{{ estudante.dataDeNascimento }}" class="form-control"></td>
       <td><input type="text" name= 'telefone' value="{{ estudante.telefone }}" class="form-control"></td>
+      <td><input type="text" name= 'livro_emprestado' value="{{ estudante.livro_emprestado.id }}" class="form-control"></td>
       </form>
       <td><a href='{% url "deletar_estudante" estudante.id %}' class="btn btn-danger">Deletar</a></td>
       <td><input type="submit" value="Atualizar" class="btn btn-primary"></td>

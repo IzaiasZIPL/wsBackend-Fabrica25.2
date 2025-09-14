@@ -1,50 +1,75 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Cadastro de livros</title>
-  </head>
-  <body>
-    <div class ='container'>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <form action ='{% url "cadastrar_livro" %}' method = 'POST'>
-        {% csrf_token %}
-        <br><br>
-    <label for="">Titulo</label>
-    <input type="text" name="titulo" class="form-control" placeholder = 'Digite o titulo do livro'>
-    <br>
-    <label for="">ISBN</label>
-    <input type="text" name="isbn" class="form-control" placeholder = 'Digite o ISBN do livro'>
-    <br>
-     <label for="">Autor</label>
-    <input type="text" name="autor" class="form-control" placeholder = 'Digite o autor do livro'>
-    <br>
-    <label for="">Editora</label>
-    <input type="text" name="editora" class="form-control" placeholder = 'Digite a editora do livro'>
-    <br>
-    <label for="">Assunto</label>
-    <input type="text" name="assunto" class="form-control" placeholder = 'Digite o assunto do livro'>
-    <br>
-    <label for="">Páginas</label>
-    <input type="number" name="paginas" class="form-control" placeholder = 'Digite o número de páginas do livro'>
-    <br>
-<input type="submit" value="Cadastrar" class="btn btn-success">
-    <br>
-    <br>
-    <a href="{% url 'home' %}" class="btn btn-secondary">Voltar</a> 
+  <title>Cadastro de livros</title>
+</head>
+
+<body>
+  <div class='container'>
+
+    <form action='{% url "cadastrar_livro" %}' method='POST'>
+      {% csrf_token %}
+      <br><br>
+      <label for="">Titulo</label>
+      <input type="text" name="titulo" class="form-control" placeholder='Digite o titulo do livro'>
+      <br>
+      <label for="">ISBN</label>
+      <input type="text" name="isbn" class="form-control" placeholder='Digite o ISBN do livro'>
+      <br>
+      <button type="button" id="buscarLivroBtn" class="btn btn-info">Buscar pelo ISBN</button>
+      <br>
+      <label for="">Autor</label>
+      <input type="text" name="autor" class="form-control" placeholder='Digite o autor do livro'>
+      <br>
+      <label for="">Editora</label>
+      <input type="text" name="editora" class="form-control" placeholder='Digite a editora do livro'>
+      <br>
+      <label for="">Assunto</label>
+      <input type="text" name="assunto" class="form-control" placeholder='Digite o assunto do livro'>
+      <br>
+      <label for="">Páginas</label>
+      <input type="number" name="paginas" class="form-control" placeholder='Digite o número de páginas do livro'>
+      <br>
+      <input type="submit" value="Cadastrar" class="btn btn-success">
+      <br>
+      <br>
+      <a href="{% url 'home' %}" class="btn btn-secondary">Voltar</a>
 
 
 
-</form>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </form>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 
+  <script>
+    document.getElementById('buscarLivroBtn').onclick = function () {
+      const isbn = document.querySelector('input[name="isbn"]').value;
+      fetch('/app_biblioteca/buscar_livro/?isbn=' + isbn)
+        .then(response => response.json())
+        .then(data => {
+          if (!data.erro) {
+            document.querySelector('input[name="titulo"]').value = data.titulo;
+            document.querySelector('input[name="autor"]').value = data.autor;
+            document.querySelector('input[name="editora"]').value = data.editora;
+            document.querySelector('input[name="assunto"]').value = data.assunto;
+            document.querySelector('input[name="paginas"]').value = data.paginas;
+          } else {
+            alert(data.erro);
+          }
+        });
+    };
+  </script>
+</body>
 
-  </body>
 </html>

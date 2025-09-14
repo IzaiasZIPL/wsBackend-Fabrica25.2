@@ -13,4 +13,5 @@ urlpatterns = [
     path('cadastrar_estudante/', cadastrar_estudante, name='cadastrar_estudante'),
     path('deletar_estudante/<int:id>', deletar_estudante, name='deletar_estudante'),
     path('atualizar_estudante/<int:id>', atualizar_estudante, name='atualizar_estudante'),
+    path('buscar_livro/', views.buscar_livro_openlibrary, name='buscar_livro'),
     ]
