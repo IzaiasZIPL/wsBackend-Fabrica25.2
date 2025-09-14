@@ -3,46 +3,47 @@
 
 # Biblioteca – Sistema de Gerenciamento de Livros e Estudantes
 
-Este projeto é um sistema de biblioteca desenvolvido em **Django**, que permite o gerenciamento completo de livros e estudantes, além de integração com a API **Open Library** para preenchimento automático de informações de livros por ISBN.
+Este projeto é um **sistema de biblioteca** desenvolvido em **Django**, que permite gerenciar livros e estudantes de forma simples e eficiente.
+Ele integra a **API Open Library**, possibilitando preencher automaticamente as informações de livros a partir do ISBN, e utiliza um banco de dados **PostgreSQL hospedado no Railway**.
 
 ---
 
 ## 📑 Índice
 
-1. [Funcionalidades](#-funcionalidades)
-2. [Estrutura do Projeto](#-estrutura-do-projeto)
-3. [Como Rodar o Projeto](#-como-rodar-o-projeto)
-
-   * [Pré-requisitos](#1️⃣-pré-requisitos)
-   * [Passo a Passo](#2️⃣-passo-a-passo)
-4. [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-5. [Observações](#-observações)
-6. [Testes](#-testes)
-7. [Licença](#-licença)
+1. [✨ Funcionalidades](#-funcionalidades)
+2. [📂 Estrutura do Projeto](#-estrutura-do-projeto)
+3. [🚀 Como Rodar o Projeto](#-como-rodar-o-projeto)
+   3.1 [Pré-requisitos](#1️⃣-pré-requisitos)
+   3.2 [Passo a Passo](#2️⃣-passo-a-passo)
+4. [🛠 Tecnologias Utilizadas](#-tecnologias-utilizadas)
+5. [⚙️ Configuração do Banco de Dados (Railway)](#️-configuração-do-banco-de-dados-railway)
+6. [📌 Boas Práticas e Observações](#-boas-práticas-e-observações)
+7. [🧪 Testes](#-testes)
+8. [📜 Licença](#-licença)
 
 ---
 
 ## ✨ Funcionalidades
 
-* **Livros**
+### 📚 Livros
 
-  * Cadastro, listagem, edição e exclusão
-  * Campos: título, ISBN, autor, editora, descrição/assunto, número de páginas
-  * Preenchimento automático de dados via Open Library (ISBN)
+* Cadastro, listagem, edição e exclusão
+* Campos: **título, ISBN, autor, editora, descrição/assunto, número de páginas**
+* Preenchimento automático de informações via [Open Library](https://openlibrary.org/dev/docs/api/books) (ISBN)
 
-* **Estudantes**
+### 👩‍🎓 Estudantes
 
-  * Cadastro, listagem, edição e exclusão
-  * Campos: nome, data de nascimento, telefone, e-mail
-  * Associação de livro emprestado ao estudante (OneToOne)
+* Cadastro, listagem, edição e exclusão
+* Campos: **nome, data de nascimento, telefone, e-mail**
+* Associação de livro emprestado ao estudante (**OneToOne**)
 
-* **Interface Web Responsiva**
+### 🌐 Interface Web Responsiva
 
-  * Templates organizados e estilizados (compatíveis com Bootstrap)
+* Templates organizados e estilizados (compatíveis com **Bootstrap**)
 
-* **Integração com API Externa**
+### 🔗 Integração Externa
 
-  * Consumo da [Open Library](https://openlibrary.org/dev/docs/api/books) para buscar informações de livros dinamicamente
+* Consumo da **API Open Library** para buscar informações de livros dinamicamente
 
 ---
 
@@ -54,9 +55,9 @@ biblioteca/
 │   ├── admin.py
 │   ├── apps.py
 │   ├── models.py
-│   ├── tests.py
-│   ├── urls.py
 │   ├── views.py
+│   ├── urls.py
+│   ├── tests.py
 │   ├── migrations/
 │   └── templates/
 │       └── app_biblioteca/
@@ -71,10 +72,12 @@ biblioteca/
 │   ├── urls.py
 │   ├── wsgi.py
 │   └── asgi.py
-├── db.sqlite3
 ├── manage.py
+├── requirements.txt
 └── README.md
 ```
+
+> 💡 O banco de dados está configurado para **PostgreSQL** via Railway (em produção), mas pode ser ajustado para SQLite em desenvolvimento.
 
 ---
 
@@ -83,8 +86,9 @@ biblioteca/
 ### 1️⃣ Pré-requisitos
 
 * [Python 3.10+](https://www.python.org/downloads/)
-* [pip](https://pip.pypa.io/en/stable/) instalado
-* [Git](https://git-scm.com/) (opcional, para clonar o repositório)
+* [pip](https://pip.pypa.io/en/stable/)
+* [Git](https://git-scm.com/)
+* Conta no [Railway](https://railway.app/) (opcional, caso queira usar o banco online)
 
 ---
 
@@ -97,7 +101,7 @@ biblioteca/
    cd biblioteca
    ```
 
-2. **Crie um ambiente virtual (opcional, mas recomendado)**
+2. **Crie e ative um ambiente virtual**
 
    ```bash
    python -m venv venv
@@ -111,29 +115,39 @@ biblioteca/
    pip install -r requirements.txt
    ```
 
-4. **Execute as migrações do banco de dados**
+4. **Configure as variáveis de ambiente**
+
+   Crie um arquivo `.env` na raiz do projeto com:
+
+   ```env
+   DEBUG=True
+   SECRET_KEY=sua_chave_secreta
+   DATABASE_URL=postgresql://usuario:senha@host:porta/nome_do_banco
+   ```
+
+5. **Execute as migrações**
 
    ```bash
    python manage.py makemigrations
    python manage.py migrate
    ```
 
-5. **Crie um superusuário (opcional, para acessar o admin do Django)**
+6. **Crie um superusuário (opcional)**
 
    ```bash
    python manage.py createsuperuser
    ```
 
-6. **Inicie o servidor**
+7. **Inicie o servidor**
 
    ```bash
    python manage.py runserver
    ```
 
-7. **Acesse no navegador**
+8. **Acesse no navegador**
 
    ```
-   http://127.0.0.1:8000/app_biblioteca/
+   http://127.0.0.1:8000/app_biblioteca/home
    ```
 
 ---
@@ -141,29 +155,45 @@ biblioteca/
 ## 🛠 Tecnologias Utilizadas
 
 * [Django](https://www.djangoproject.com/) – Framework web em Python
-* [Open Library API](https://openlibrary.org/dev/docs/api/books) – Consumo de dados de livros via ISBN
-* [SQLite](https://www.sqlite.org/) – Banco de dados padrão
-* [Bootstrap](https://getbootstrap.com/) – Estilização e layout responsivo
+* [Open Library API](https://openlibrary.org/dev/docs/api/books) – Consulta de livros via ISBN
+* [PostgreSQL (Railway)](https://railway.app/) – Banco de dados em nuvem
+* [Bootstrap](https://getbootstrap.com/) – Layout responsivo e estilização
+* [Requests](https://pypi.org/project/requests/) – Consumo de API
 
 ---
 
-## 📌 Observações
+## ⚙️ Configuração do Banco de Dados (Railway)
 
-* O projeto está configurado para ambiente de desenvolvimento (`DEBUG=True`).
-* O banco de dados padrão é o **SQLite** (`db.sqlite3`).
-* O arquivo `.gitignore` deve conter:
+1. Crie um projeto no [Railway](https://railway.app/).
+2. Adicione um banco **PostgreSQL**.
+3. Copie a **connection string** gerada.
+4. Configure a variável `DATABASE_URL` no seu arquivo `.env`.
+5. Ajuste o `settings.py` para ler essa URL com `dj-database-url` ou `os.environ`.
 
-  * `venv/`
-  * `__pycache__/`
-  * `*.pyc`
-  * `db.sqlite3`
-  * `.env` (se houver variáveis de ambiente)
+---
+
+## 📌 Boas Práticas e Observações
+
+* Mantenha `DEBUG=False` em produção.
+
+* Nunca suba suas **chaves secretas** ou `.env` para o repositório.
+
+* Adicione ao `.gitignore`:
+
+  ```
+  venv/
+  __pycache__/
+  *.pyc
+  .env
+  ```
+
+* O projeto pode ser adaptado para rodar com SQLite em ambiente local, facilitando testes rápidos.
 
 ---
 
 ## 🧪 Testes
 
-Para executar os testes automatizados:
+Execute os testes automatizados:
 
 ```bash
 python manage.py test
@@ -177,4 +207,5 @@ Este projeto foi desenvolvido para fins **educacionais e de demonstração**.
 Sinta-se livre para utilizar, melhorar e compartilhar.
 
 ---
+
 
