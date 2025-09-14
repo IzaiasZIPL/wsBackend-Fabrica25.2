@@ -8,27 +8,31 @@ def home(request):
     return render(request, 'app_biblioteca/home.html')
 #viws de livros
 def cadastrar_livro(request):
-  if request.method == 'GET':
-    return render(request, 'app_biblioteca/livros/cadastrar_livros.html')
-  elif request.method == 'POST':
-     titulo = request.POST.get('titulo')
-     autor = request.POST.get('autor')
-     isbn = request.POST.get('isbn')
-     editora = request.POST.get('editora')
-     assunto = request.POST.get('assunto')
-     paginas = request.POST.get('paginas')
+    if request.method == 'GET':
+        return render(request, 'app_biblioteca/livros/cadastrar_livros.html')
+    elif request.method == 'POST':
+        titulo = request.POST.get('titulo')
+        autor = request.POST.get('autor')
+        isbn = request.POST.get('isbn')
+        editora = request.POST.get('editora')
+        assunto = request.POST.get('assunto')
+        paginas = request.POST.get('paginas')
 
-     livro = Livro(
-        titulo=titulo, 
-        autor=autor, 
-        isbn=isbn, 
-        editora=editora, 
-        assunto=assunto, 
-        paginas=paginas
-    )
-     
-     livro.save()
-     return redirect('cadastrar_livro')
+        if Livro.objects.filter(isbn=isbn).exists():
+            error = "Já existe um livro com esse ISBN."
+            return render(request, 'app_biblioteca/livros/cadastrar_livros.html', {'error': error})
+
+        Livro.objects.create(
+            titulo=titulo,
+            autor=autor,
+            isbn=isbn,
+            editora=editora,
+            assunto=assunto,
+            paginas=paginas
+        )
+        return redirect('listar_livros')
+    return render(request, 'app_biblioteca/livros/cadastrar_livros.html')
+
   
 def deletar_livro(request, id): 
     livro = get_object_or_404(Livro, id=id)

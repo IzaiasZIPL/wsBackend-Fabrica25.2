@@ -70,9 +70,9 @@
       <td><input type="text" name= 'editora' value="{{ livro.editora }}" class="form-control"></td>
       <td><input type="text" name= 'assunto' value="{{ livro.assunto }}" class="form-control"></td>
       <td><input type="text" name= 'paginas' value="{{ livro.paginas }}" class="form-control"></td>
-      </form>
       <td><a href='{% url "deletar_livro" livro.id %}' class="btn btn-danger">Deletar</a></td>
       <td><input type="submit" value="Atualizar" class="btn btn-primary"></td>
+      </form>
     </tr>
     {% endfor %}
   </tbody>

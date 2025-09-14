@@ -58,12 +58,24 @@
 </nav>
 
   <div class='formulario'>
+    
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+      <strong>Erro!</strong> {{ error }}
+    </div>
+    {% endif %}
+
+    {% if success %}
+    <div class="alert alert-success" role="alert">
+      <strong>Sucesso!</strong> {{ success }}
+    </div>
+    {% endif %}
 
     <form action='{% url "cadastrar_livro" %}' method='POST'>
       {% csrf_token %}
       <br><br>
       <label for="">Titulo</label>
-      <input type="text" name="titulo" class="form-control" placeholder='Digite o titulo do livro'>
+      <input type="text" name="titulo" class="form-control" placeholder='Digite o titulo do livro' required>
       <br>
       <label for="">ISBN</label>
       <input type="text" name="isbn" class="form-control" placeholder='Digite o ISBN do livro'>
@@ -71,16 +83,16 @@
       <button type="button" id="buscarLivroBtn" class="btn btn-info">Buscar pelo ISBN</button>
       <br>
       <label for="">Autor</label>
-      <input type="text" name="autor" class="form-control" placeholder='Digite o autor do livro'>
+      <input type="text" name="autor" class="form-control" placeholder='Digite o autor do livro' required>
       <br>
       <label for="">Editora</label>
-      <input type="text" name="editora" class="form-control" placeholder='Digite a editora do livro'>
+      <input type="text" name="editora" class="form-control" placeholder='Digite a editora do livro' required>
       <br>
-      <label for="">Assunto</label>
-      <input type="text" name="assunto" class="form-control" placeholder='Digite o assunto do livro'>
+      <label for="">Descrição</label>
+      <input type="text" name="assunto" class="form-control" placeholder='Digite o assunto do livro' required>
       <br>
       <label for="">Páginas</label>
-      <input type="number" name="paginas" class="form-control" placeholder='Digite o número de páginas do livro'>
+      <input type="number" name="paginas" class="form-control" placeholder='Digite o número de páginas do livro' required>
       <br>
       <div class = 'botoes'>
       <input type="submit" value="Cadastrar" class="btn btn-success">
