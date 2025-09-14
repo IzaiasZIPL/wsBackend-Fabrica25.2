@@ -1,10 +1,10 @@
 from django.urls import path
 from . import views
-from .views import listar_livros, cadastrar_livro, deletar_livro, atualizar_livro, listar_estudantes, cadastrar_estudante, deletar_estudante, atualizar_estudante
+from .views import listar_livros, cadastrar_livro, deletar_livro, atualizar_livro, listar_estudantes, cadastrar_estudante, deletar_estudante, atualizar_estudante, home
 
 #rota, view e nome de referencia
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', home, name='home'),
     path('listar_livros/', listar_livros, name= 'listar_livros'),
     path('cadastrar_livro/', cadastrar_livro, name= 'cadastrar_livro'),
     path('deletar_livro/<int:id>', deletar_livro, name = 'deletar_livro'),
