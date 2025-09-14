@@ -4,7 +4,7 @@ from django.db import models
 
 class Livro(models.Model):
     titulo = models.CharField(max_length=100)
-    isbn = models.IntegerField(unique=True)
+    isbn = models.BigIntegerField(unique=True)
     autor = models.CharField(max_length=50, default="Desconhecido")
     editora = models.CharField(max_length=30)
     assunto = models.CharField(max_length=50)
@@ -18,7 +18,7 @@ class Livro(models.Model):
 class Estudante(models.Model):
     nome = models.CharField(max_length=100)
     dataDeNascimento = models.DateField()
-    telefone = models.IntegerField()
+    telefone = models.BigIntegerField()
     email = models.EmailField(max_length=50)
     livro_emprestado = models.OneToOneField(Livro, on_delete=models.SET_NULL, null=True, blank=True)
     
