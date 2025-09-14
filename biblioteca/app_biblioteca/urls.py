@@ -1,5 +1,5 @@
-from django.urls import path
 from . import views
+from django.urls import path
 from .views import listar_livros, cadastrar_livro, deletar_livro, atualizar_livro, listar_estudantes, cadastrar_estudante, deletar_estudante, atualizar_estudante, home
 
 #rota, view e nome de referencia

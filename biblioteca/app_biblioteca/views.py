@@ -1,7 +1,7 @@
-from django.shortcuts import get_object_or_404, render, redirect
+import requests
 from .models import Livro, Estudante
 from django.http import JsonResponse
-import requests
+from django.shortcuts import get_object_or_404, render, redirect
 #from .forms import PessoaForm
 
 def home(request):
@@ -106,6 +106,8 @@ def atualizar_estudante(request, id):
 def listar_estudantes(request):
     estudantes = Estudante.objects.all()
     return render(request, 'app_biblioteca/estudantes/listar_estudantes.html', {'estudantes': estudantes})
+
+# Função para buscar livro na Open Library API
 
 def buscar_livro_openlibrary(request):
     isbn = request.GET.get('isbn')
