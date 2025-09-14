@@ -50,29 +50,31 @@ Ele integra a **API Open Library**, possibilitando preencher automaticamente as 
 ## 📂 Estrutura do Projeto
 
 ```
-biblioteca/
-├── app_biblioteca/
-│   ├── admin.py
-│   ├── apps.py
-│   ├── models.py
-│   ├── views.py
-│   ├── urls.py
-│   ├── tests.py
-│   ├── migrations/
-│   └── templates/
-│       └── app_biblioteca/
-│           ├── livros/
-│           │   ├── cadastrar_livros.html
-│           │   └── listar_livros.html
-│           └── estudantes/
-│               ├── cadastrar_estudantes.html
-│               └── listar_estudantes.html
+wsBackend-Fabrica25.2/
 ├── biblioteca/
-│   ├── settings.py
-│   ├── urls.py
-│   ├── wsgi.py
-│   └── asgi.py
-├── manage.py
+│   ├── app_biblioteca/
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── models.py
+│   │   ├── views.py
+│   │   ├── urls.py
+│   │   ├── tests.py
+│   │   ├── migrations/
+│   │   └── templates/
+│   │       └── app_biblioteca/
+│   │           ├── home.html
+│   │           ├── livros/
+│   │           │   ├── cadastrar_livros.html
+│   │           │   └── listar_livros.html
+│   │           └── estudantes/
+│   │               ├── cadastrar_estudantes.html
+│   │               └── listar_estudantes.html
+│   ├── biblioteca/
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   ├── wsgi.py
+│   │   └── asgi.py
+│   └── manage.py
 ├── requirements.txt
 └── README.md
 ```
@@ -97,8 +99,8 @@ biblioteca/
 1. **Clone o repositório**
 
    ```bash
-   git clone https://github.com/seu-usuario/biblioteca.git
-   cd biblioteca
+   git clone https://github.com/IzaiasZIPL/wsBackend-Fabrica25.2.git
+   cd wsBackend-Fabrica25.2
    ```
 
 2. **Crie e ative um ambiente virtual**
@@ -121,13 +123,22 @@ biblioteca/
 
    ```env
    DEBUG=True
-   SECRET_KEY=sua_chave_secreta
-   DATABASE_URL=postgresql://usuario:senha@host:porta/nome_do_banco
+   SECRET_KEY=sua_chave_secreta_muito_segura_aqui
+   DB_NAME=nome_do_banco
+   DB_USER=usuario_do_banco
+   DB_PASSWORD=senha_do_banco
+   DB_HOST=host_do_banco
+   DB_PORT=5432
    ```
+
+   > **Nota:** Para Railway, você pode obter essas informações na aba "Variables" do seu projeto.
 
 5. **Execute as migrações**
 
+   Navegue para a pasta do projeto Django e execute:
+
    ```bash
+   cd biblioteca
    python manage.py makemigrations
    python manage.py migrate
    ```
@@ -147,8 +158,10 @@ biblioteca/
 8. **Acesse no navegador**
 
    ```
-   http://127.0.0.1:8000/app_biblioteca/home
+   http://127.0.0.1:8000/app_biblioteca/home/
    ```
+
+   > **Importante:** Note a barra final na URL para evitar redirecionamentos.
 
 ---
 
@@ -166,9 +179,26 @@ biblioteca/
 
 1. Crie um projeto no [Railway](https://railway.app/).
 2. Adicione um banco **PostgreSQL**.
-3. Copie a **connection string** gerada.
-4. Configure a variável `DATABASE_URL` no seu arquivo `.env`.
-5. Ajuste o `settings.py` para ler essa URL com `dj-database-url` ou `os.environ`.
+3. Copie as **informações de conexão** geradas (não a connection string completa).
+4. Configure as variáveis individuais no seu arquivo `.env`:
+   - `DB_NAME`: Nome do banco
+   - `DB_USER`: Usuário do banco  
+   - `DB_PASSWORD`: Senha do banco
+   - `DB_HOST`: Host do banco
+   - `DB_PORT`: Porta do banco (geralmente 5432)
+
+### 🔄 **Alternativa para Desenvolvimento Local**
+
+Se preferir usar SQLite para desenvolvimento local, comente as linhas do PostgreSQL no `settings.py` e descomente:
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+```
 
 ---
 
@@ -196,6 +226,7 @@ biblioteca/
 Execute os testes automatizados:
 
 ```bash
+cd biblioteca  # Certifique-se de estar no diretório correto
 python manage.py test
 ```
 
